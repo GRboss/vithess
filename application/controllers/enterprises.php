@@ -2,23 +2,67 @@
 
 class Enterprises extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index() {
-		echo 'Bruce';
+		$this->load->view('_top');
+		$this->load->view('enterprises/enterprises');
+		$this->load->view('_bottom');
+	}
+	
+	public function login() {
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->index();
+		} else {
+			$this->load->model('Login_model');
+			$result = $this->Login_model->do_login(
+				$this->input->post('username'),
+				$this->input->post('password')
+			);
+			
+			if($result['success']) {
+				$authenticated = 1;
+				$newdata = array(
+					'authenticated'  => $authenticated,
+					'user_full_name' => $result['user_full_name'],
+					'user_id' => $result['user_id'],
+					'user_user_type_id' => $result['user_user_type_id']
+				);
+				
+				if($this->input->post('rememberme')=='on') {
+					$cookie = array(
+						'name'   => 'vithess_username',
+						'value'  => $this->input->post('username'),
+						'expire' => '86500',
+						'domain' => '/'
+					);
+					$this->input->set_cookie($cookie);
+					$cookie = array(
+						'name'   => 'vithess_password',
+						'value'  => $this->encrypt->encode($this->input->post('password')),
+						'expire' => '86500',
+						'domain' => '/'
+					);
+					$this->input->set_cookie($cookie);
+				}
+				
+				$this->session->set_userdata($newdata);
+				
+				header("Location: ".base_url('index.php/homepage'));
+			} else {
+				$authenticated = 0;
+				$newdata = array(
+					'authenticated'  => $authenticated,
+					'user_full_name' => '',
+					'user_id' => 0,
+					'user_user_type_id' => 0
+				);
+				$this->index();
+			}
+		}
 	}
 }
 

@@ -38,6 +38,9 @@
 |
 */
 
+$route['homepage/(:any)'] = "homepage/$1";
+$route['homepage'] = "homepage";
+$route['enterprises/(:any)'] = "enterprises/$1";
 $route['enterprises'] = "enterprises";
 $route['default_controller'] = "landing";
 $route['404_override'] = '';
