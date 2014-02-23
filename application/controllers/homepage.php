@@ -3,11 +3,26 @@
 class Homepage extends CI_Controller {
 
 	public function index() {
+		$this->page();
+	}
+	
+	public function page() {
+		$this->load->library('pagination');
 		$this->load->model('Areas_model');
-		$areas = $this->Areas_model->load_areas($this->session->userdata('user_company_id'));
+		
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3)-1 : 0;
+		
+		$config['base_url'] = base_url('index.php/homepage/page');
+		$config['total_rows'] = 4;
+		$config['per_page'] = 2; 
+
+		$this->pagination->initialize($config); 
+		
+		$areas = $this->Areas_model->load_areas($this->session->userdata('user_company_id'),$page*$config['per_page'],$config['per_page']);
 		
 		$data = array(
-			'areas' => $areas
+			'areas' => $areas,
+			'pagination' => $this->pagination->create_links()
 		);
 		
 		$this->load->view('_top');

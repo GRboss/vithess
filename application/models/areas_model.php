@@ -9,7 +9,7 @@ class Areas_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function load_areas($company_id) {
+	function load_areas($company_id,$offset,$limit) {
 		//echo $this->session->userdata('authenticated');
 		$query = $this->db->query("
 			SELECT areas.*,messages.*,area_id,count(tile_id) AS total_tiles,sum(tile_price) AS sum_price
@@ -21,6 +21,7 @@ class Areas_model extends CI_Model {
 			AND area_active=1
 			GROUP BY area_id
 			ORDER BY area_timestamp_start DESC
+			LIMIT ".$offset.",".$limit."
 		");
 		$result = array(
 		);

@@ -38,6 +38,7 @@
 |
 */
 
+$route['homepage/(:any)/(:any)'] = "homepage/$1/$2";
 $route['homepage/(:any)'] = "homepage/$1";
 $route['homepage'] = "homepage";
 $route['enterprises/(:any)'] = "enterprises/$1";
