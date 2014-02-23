@@ -8,7 +8,7 @@ class Login_model extends CI_Model {
     
     function do_login($username,$password) {    	
         $query = $this->db->query("
-			SELECT user_full_name,user_id,user_user_type_id
+			SELECT user_full_name,user_id,user_user_type_id,user_company_id
 			FROM users
 			WHERE user_username='".$username."'
 			AND user_password='".$password."'
@@ -19,6 +19,7 @@ class Login_model extends CI_Model {
 		$row[0]['success'] = true;
 		$row[0]['user_id'] = intval($row[0]['user_id']);
 		$row[0]['user_user_type_id'] = intval($row[0]['user_user_type_id']);
+		$row[0]['user_company_id'] = intval($row[0]['user_company_id']);
 		return $row[0];
 	} else {
 		return array(

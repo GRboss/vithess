@@ -12,7 +12,7 @@
 					<h1>ViThess
 						<span class="pull-right">
 							<a href="#" class="btn btn-default">Manage categories</a> 
-							<a href="#" class="btn btn-default">Arrange</a> 
+							<a href="enterprises/logout" class="btn btn-default">Logout</a> 
 							<a href="#" class="btn btn-lg btn-primary">
 								<span class="glyphicon glyphicon-plus"></span> Create new</a>
 						</span>   
@@ -26,44 +26,37 @@
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th>Username</th>
-								<th>Date registered</th>
-								<th>Role</th>
-								<th>Status</th>                                          
+								<th>Όνομα</th>
+								<th>Ενεργοποίηση</th>
+								<th>Απενεργοποίηση</th>
+								<th>Πλακάκια</th>                                          
+								<th>Κόστος</th>                                          
+								<th>Κατάσταση</th>                                          
 							</tr>
-						</thead>   
+						</thead>
 						<tbody>
-							<tr>
-								<td>Donna R. Folse</td>
-								<td>2012/05/06</td>
-								<td>Editor</td>
-								<td><span class="label label-success">Active</span>
-								</td>                                       
-							</tr>
-							<tr>
-								<td>Emily F. Burns</td>
-								<td>2011/12/01</td>
-								<td>Staff</td>
-								<td><span class="label label-important">Banned</span></td>                                       
-							</tr>
-							<tr>
-								<td>Andrew A. Stout</td>
-								<td>2010/08/21</td>
-								<td>User</td>
-								<td><span class="label">Inactive</span></td>                                        
-							</tr>
-							<tr>
-								<td>Mary M. Bryan</td>
-								<td>2009/04/11</td>
-								<td>Editor</td>
-								<td><span class="label label-warning">Pending</span></td>                                       
-							</tr>
-							<tr>
-								<td>Mary A. Lewis</td>
-								<td>2007/02/01</td>
-								<td>Staff</td>
-								<td><span class="label label-success">Active</span></td>                                        
-							</tr>                                   
+							<?php
+							foreach ($areas as $area) {
+								echo '<tr>';
+								echo '<td>'.$area['area_name'].'</td>';
+								echo '<td>'.$area['area_timestamp_start'].'</td>';
+								echo '<td>'.$area['area_timestamp_finish'].'</td>';
+								echo '<td>'.$area['total_tiles'].'</td>';
+								echo '<td>€ '.$area['sum_price'].'</td>';
+								echo '<td>';
+								$date_start = new DateTime($area['area_timestamp_start'], new DateTimeZone('Europe/Athens'));
+								$date_finish = new DateTime($area['area_timestamp_finish'], new DateTimeZone('Europe/Athens'));
+								if(time() < $date_start->format("U")) {
+									echo '<span class="label label-warning">Εκκρεμεί</span>';
+								} else if(($date_start->format("U") <= time()) && (time() <= $date_finish->format("U"))) {
+									echo '<span class="label label-success">Ενεργή</span>';
+								} else if($date_finish->format("U") < time()) {
+									echo '<span class="label label-danger">Έληξε</span>';
+								}
+								echo '</td>';
+								echo '</tr>';
+							}
+							?>
 						</tbody>
 					</table>
 	            </div>

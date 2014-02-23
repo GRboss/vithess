@@ -29,7 +29,8 @@ class Enterprises extends CI_Controller {
 					'authenticated'  => $authenticated,
 					'user_full_name' => $result['user_full_name'],
 					'user_id' => $result['user_id'],
-					'user_user_type_id' => $result['user_user_type_id']
+					'user_user_type_id' => $result['user_user_type_id'],
+					'user_company_id' => $result['user_company_id']
 				);
 				
 				if($this->input->post('rememberme')=='on') {
@@ -58,11 +59,17 @@ class Enterprises extends CI_Controller {
 					'authenticated'  => $authenticated,
 					'user_full_name' => '',
 					'user_id' => 0,
-					'user_user_type_id' => 0
+					'user_user_type_id' => 0,
+					'user_company_id' => 0
 				);
 				$this->index();
 			}
 		}
+	}
+	
+	public function logout() {
+		$this->session->sess_destroy();
+		header("Location: ".base_url());
 	}
 }
 
