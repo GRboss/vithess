@@ -38,6 +38,8 @@
 |
 */
 
+$route['areas/(:any)/(:any)'] = "areas/$1/$2";
+$route['areas/(:any)'] = "areas/$1";
 $route['homepage/(:any)/(:any)'] = "homepage/$1/$2";
 $route['homepage/(:any)'] = "homepage/$1";
 $route['homepage'] = "homepage";

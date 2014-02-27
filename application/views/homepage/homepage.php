@@ -38,7 +38,7 @@
 							<?php
 							foreach ($areas as $area) {
 								echo '<tr>';
-								echo '<td>'.$area['area_name'].'</td>';
+								echo '<td><a href="'.base_url('index.php').'/areas/details/'.$area['area_id'].'">'.$area['area_name'].'</a></td>';
 								echo '<td>'.$area['area_timestamp_start'].'</td>';
 								echo '<td>'.$area['area_timestamp_finish'].'</td>';
 								echo '<td>'.$area['total_tiles'].'</td>';
@@ -62,5 +62,6 @@
 					<?php echo $pagination; ?>
 				  </div>
 			</div>
+		</div>
 			<?php
 		}
