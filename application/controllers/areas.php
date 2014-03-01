@@ -11,10 +11,12 @@ class Areas extends CI_Controller {
 		$this->load->model('Areas_model');
 		$tiles = $this->Tiles_model->load_tiles();
 		$area_tiles = $this->Areas_model->get_area_tiles($area_id);
+		$message = $this->Areas_model->get_area_message($area_id);
 		
 		$data = array(
 			'tiles' => $tiles,
-			'area_tiles' => $area_tiles
+			'area_tiles' => $area_tiles,
+			'message' => $message
 		);
 		
 		$this->load->view('_top');

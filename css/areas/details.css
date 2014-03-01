@@ -1,0 +1,6 @@
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css");
+/* Visitor */
+.fa { font-size: 50px;text-align: right;position: absolute;top: 7px;right: 27px;outline: none; }
+a.visitor i,.visitor h4.list-group-item-heading { color:#E48A07; height:62px; font-size: 66px;}
+a.visitor:hover { background-color:#E48A07; }
+a.visitor:hover * { color:#FFF; }

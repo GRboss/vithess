@@ -48,4 +48,19 @@ class Areas_model extends CI_Model {
 		}
 		return $result;
 	}
+	
+	function get_area_message($area_id) {
+		$query = $this->db->query("
+			SELECT *
+			FROM messages
+			WHERE message_area_id=".$area_id."
+			AND message_active=1
+		");
+		if ($query->num_rows() > 0) {
+			$result = $query->result_array();
+			return $result[0];
+		} else {
+			return array();
+		}
+	}
 }

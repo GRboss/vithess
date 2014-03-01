@@ -1,4 +1,5 @@
 <link href="<?php echo base_url(); ?>css/homepage.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/areas/details.css" rel="stylesheet">
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="<?php echo base_url(); ?>js/map.js"></script>
@@ -22,15 +23,35 @@
 				</h1>
 			</div>
 		</div>
-	</div>
-	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><?php echo $message['message_title']; ?></h3>
+					</div>
+					<div class="panel-body">
+						<?php echo $message['message_text']; ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="list-group">
+					<a href="http://www.jquery2dotnet.com" class="list-group-item visitor">
+						<h3 class="pull-right">
+							<i class="fa fa-eye"></i>
+						</h3>
+						<h4 class="list-group-item-heading count"><?php echo $message['message_views']; ?></h4>
+					</a>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div id="map-canvas" style="height:500px;"></div>
 			</div>
 		</div>
 	</div>
-	<div class="">
+	<div class="hidden">
 		<?php
 		function is_in_area($area_tiles,&$pin) {
 			for($i=0; $i<count($pin); $i++) {
