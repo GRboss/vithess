@@ -11,10 +11,9 @@
 				<div class="col-md-12">
 					<h1>ViThess
 						<span class="pull-right">
-							<a href="#" class="btn btn-default">Manage categories</a> 
-							<a href="enterprises/logout" class="btn btn-default">Logout</a> 
+							<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a> 
 							<a href="#" class="btn btn-lg btn-primary">
-								<span class="glyphicon glyphicon-plus"></span> Create new</a>
+								<span class="glyphicon glyphicon-plus"></span> Δημιουργία</a>
 						</span>   
 					</h1>
 				</div>
