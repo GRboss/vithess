@@ -15,9 +15,9 @@
 			<div class="col-md-12">
 				<h1>ViThess
 					<span class="pull-right">
-						<a href="<?php echo base_url("index.php/homepage"); ?>" class="btn btn-default">Περιοχές</a> 
-						<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a> 
-						<a href="#" class="btn btn-lg btn-primary">
+						<a href="<?php echo base_url("index.php/homepage"); ?>" class="btn btn-default">Περιοχές</a>
+						<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a>
+						<a href="<?php echo base_url("index.php/areas/create"); ?>" class="btn btn-lg btn-primary">
 							<span class="glyphicon glyphicon-plus"></span> Δημιουργία</a>
 					</span>
 				</h1>
@@ -30,6 +30,8 @@
 						<h3 class="panel-title"><?php echo $message['message_title']; ?></h3>
 					</div>
 					<div class="panel-body">
+						<i><?php echo $message['message_teaser']; ?></i>
+						<hr>
 						<?php echo $message['message_text']; ?>
 					</div>
 				</div>
@@ -40,7 +42,8 @@
 						<h3 class="pull-right">
 							<i class="fa fa-eye"></i>
 						</h3>
-						<h4 class="list-group-item-heading count"><?php echo $message['message_views']; ?></h4>
+						<h4 class="list-group-item-heading count">
+							<?php echo $message['message_views']; ?></h4>
 					</a>
 				</div>
 			</div>
@@ -51,7 +54,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="hidden">
+	<div class="">
 		<?php
 		function is_in_area($area_tiles,&$pin) {
 			for($i=0; $i<count($pin); $i++) {
@@ -80,7 +83,7 @@
 				);
 			}
 		}
-		
+		print_r($area_tiles);
 		is_in_area($area_tiles, $pin);
 		
 		?>

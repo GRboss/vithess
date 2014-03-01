@@ -12,7 +12,7 @@
 					<h1>ViThess
 						<span class="pull-right">
 							<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a> 
-							<a href="#" class="btn btn-lg btn-primary">
+							<a href="<?php echo base_url("index.php/areas/create"); ?>" class="btn btn-lg btn-primary">
 								<span class="glyphicon glyphicon-plus"></span> Δημιουργία</a>
 						</span>   
 					</h1>

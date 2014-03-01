@@ -23,4 +23,27 @@ class Areas extends CI_Controller {
 		$this->load->view('areas/details',$data);
 		$this->load->view('_bottom');
 	}
+	
+	public function create() {
+		$this->load->model('Tiles_model');
+		$tiles = $this->Tiles_model->load_tiles();
+		
+		$data = array(
+			'tiles' => $tiles
+		);
+		
+		$this->form_validation->set_rules('area_name', 'Όνομα περιοχής', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('area_timestamp_finish', 'Στιγμή απενεργοποίησης', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('message_title', 'Τίτλος μηνύματος', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('message_teaser', 'Σύντομη περιγραφή', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('message_text', 'Κείμενο μηνύματος', 'trim|required|xss_clean');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('_top');
+			$this->load->view('areas/create',$data);
+			$this->load->view('_bottom');
+		} else {
+			$this->load->view('formsuccess');
+		}
+	}
 }
