@@ -23,8 +23,24 @@ class Areas_model extends CI_Model {
 			ORDER BY area_timestamp_start DESC
 			LIMIT ".$offset.",".$limit."
 		");
-		$result = array(
-		);
+		$result = array();
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$result[] = $row;
+			}
+		}
+		return $result;
+	}
+	
+	function get_area_tiles($area_id) {
+		$query = $this->db->query("
+			SELECT tiles.*
+			FROM tiles,tiles_to_areas
+			WHERE tile_to_area_area_id=".$area_id."
+			AND tile_id=tile_to_area_tile_id
+			AND tile_active=1
+		");
+		$result = array();
 		if ($query->num_rows() > 0) {
 			foreach ($query->result_array() as $row) {
 				$result[] = $row;

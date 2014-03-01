@@ -30,20 +30,38 @@
 			</div>
 		</div>
 	</div>
-	<div class="hidden">
+	<div class="">
 		<?php
+		function is_in_area($area_tiles,&$pin) {
+			for($i=0; $i<count($pin); $i++) {
+				for($j=0; $j<count($pin[0]); $j++) {
+					for($k=0; $k<count($area_tiles); $k++) {
+						if($pin[$i][$j]['tile_id']==$area_tiles[$k]['tile_id']) {
+							$pin[$i][$j]['in_area'] = 1;
+							break;
+						}
+					}
+				}
+			}
+		}
+		
 		$pin=array();
 		for($i=0; $i<count($tiles); $i++) {
 			if(!isset($pin[intval($tiles[$i]['tile_pos_row'])])) {
 				$pin[intval($tiles[$i]['tile_pos_row'])] = array();
+				$i--;
 			} else {
-				$pin[intval($tiles[$i]['tile_pos_row'])][intval($tiles[$i]['tile_pos_col'])-1] = array(
+				$pin[intval($tiles[$i]['tile_pos_row'])][intval($tiles[$i]['tile_pos_col'])] = array(
 					'point' => $tiles[$i]['tile_lat'].','.$tiles[$i]['tile_long'],
 					'price' => $tiles[$i]['tile_price'],
-					'tile_id' => $tiles[$i]['tile_id']
+					'tile_id' => $tiles[$i]['tile_id'],
+					'in_area' => 0
 				);
 			}
 		}
+		
+		is_in_area($area_tiles, $pin);
+		
 		?>
 		<script type="text/javascript">
 			$( document ).ready(function() {
@@ -57,7 +75,7 @@
 							strokeOpacity: 0.8,
 							strokeWeight: 2,
 							fillColor: '#FF0000',
-							fillOpacity: 0.1,
+							fillOpacity: <?php echo $pin[$i-1][$j]['in_area']==1 ? 0.5 : 0.1 ?>,
 							map: MAP,
 							bounds: new google.maps.LatLngBounds(
 								new google.maps.LatLng(<?php echo $pin[$i][$j-1]['point']; ?>),
@@ -65,7 +83,8 @@
 							),
 							GL: {
 								tile_id: <?php echo $pin[$i-1][$j]['tile_id']; ?>,
-								price: <?php echo $pin[$i-1][$j]['price']; ?>
+								price: <?php echo $pin[$i-1][$j]['price']; ?>,
+								in_area: <?php echo $pin[$i-1][$j]['in_area']; ?>
 							}
 						  }));
 				<?php
