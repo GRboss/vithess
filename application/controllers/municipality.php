@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Enterprises extends CI_Controller {
+class Municipality extends CI_Controller {
 
 	public function index() {
 		$this->load->view('_top');
-		$this->load->view('enterprises/enterprises');
+		$this->load->view('municipality/municipality');
 		$this->load->view('_bottom');
 	}
 	
@@ -21,7 +21,7 @@ class Enterprises extends CI_Controller {
 			$result = $this->Login_model->do_login(
 				$this->input->post('username'),
 				$this->input->post('password'),
-				2 //Enterprise user
+				3 //Authority
 			);
 			
 			if($result['success']) {
@@ -53,7 +53,7 @@ class Enterprises extends CI_Controller {
 				
 				$this->session->set_userdata($newdata);
 				
-				header("Location: ".base_url('index.php/homepage'));
+				header("Location: ".base_url('index.php/dashboard'));
 			} else {
 				$authenticated = 0;
 				$newdata = array(

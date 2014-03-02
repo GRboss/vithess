@@ -6,12 +6,13 @@ class Login_model extends CI_Model {
         parent::__construct();
     }
     
-    function do_login($username,$password) {    	
+    function do_login($username,$password,$user_type_id) {    	
         $query = $this->db->query("
 			SELECT user_full_name,user_id,user_user_type_id,user_company_id
 			FROM users
 			WHERE user_username='".$username."'
 			AND user_password='".$password."'
+			AND user_user_type_id=".$user_type_id."
 			AND user_active=1
         ");
 	if ($query->num_rows() > 0) {

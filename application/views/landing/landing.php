@@ -12,6 +12,7 @@
 						<ul class="nav masthead-nav">
 							<li class="active"><a href="#">Αρχική</a></li>
 							<li><a href="index.php/enterprises">Επιχειρήσεις</a></li>
+							<li><a href="index.php/municipality">Δημοτική Αρχή</a></li>
 							<li><a href="#">Επικοινωνία</a></li>
 						</ul>
 					</div>
