@@ -83,7 +83,7 @@
 				);
 			}
 		}
-		print_r($area_tiles);
+		
 		is_in_area($area_tiles, $pin);
 		
 		?>

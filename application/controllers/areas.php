@@ -33,7 +33,9 @@ class Areas extends CI_Controller {
 		);
 		
 		$this->form_validation->set_rules('area_name', 'Όνομα περιοχής', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('area_timestamp_start', 'Στιγμή ενεργοποίησης', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('area_timestamp_finish', 'Στιγμή απενεργοποίησης', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('tiles', 'Περιοχές', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('message_title', 'Τίτλος μηνύματος', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('message_teaser', 'Σύντομη περιγραφή', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('message_text', 'Κείμενο μηνύματος', 'trim|required|xss_clean');
@@ -43,7 +45,15 @@ class Areas extends CI_Controller {
 			$this->load->view('areas/create',$data);
 			$this->load->view('_bottom');
 		} else {
-			$this->load->view('formsuccess');
+			$this->save();
 		}
+	}
+	
+	public function save() {
+		$this->load->model('Areas_model');
+		$this->Areas_model->save(array(
+			'data' => $this->input->post()
+		));
+		header("Location: ".  base_url("index.php/homepage"));
 	}
 }

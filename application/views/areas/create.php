@@ -1,11 +1,13 @@
 <link href="<?php echo base_url(); ?>css/homepage.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/areas/create.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>js/jquery-ui-1.10.4.custom/css/start/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/timepicker.css" rel="stylesheet">
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="<?php echo base_url(); ?>js/map.js"></script>
 <script src="<?php echo base_url(); ?>js/areas/create.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="<?php echo base_url(); ?>js/timepicker.js"></script>
 </head>
 <body>
 	<?php
@@ -33,8 +35,10 @@
 			<div class="col-md-6">
 				<label>Όνομα περιοχής</label>
 				<input type="text" name="area_name" value="<?php echo set_value('area_name'); ?>" class="form-control input-md" />
+				<label>Στιγμή ενεργοποίησης</label>
+				<input type="text" name="area_timestamp_start" id="area_timestamp_start" value="<?php echo set_value('area_timestamp_start'); ?>" class="form-control input-md" />
 				<label>Στιγμή απενεργοποίησης</label>
-				<input type="text" name="area_timestamp_finish" value="<?php echo set_value('area_timestamp_finish'); ?>" class="form-control input-md" />
+				<input type="text" name="area_timestamp_finish" id="area_timestamp_finish" value="<?php echo set_value('area_timestamp_finish'); ?>" class="form-control input-md" />
 				<input type="hidden" name="tiles" id="tiles" value=""/>
 				<span id="totalMoneySpan">€ <span id="totalMoneyAmount">0</span></span>
 			</div>
