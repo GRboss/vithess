@@ -21,11 +21,10 @@
 			<div class="row">
 				<div class="panel panel-default widget">
 					<div class="panel-heading">
-						<span class="glyphicon glyphicon-comment"></span>
 						<h3 class="panel-title">
-							Περιοχές προς έγκριση</h3>
-						<span class="label label-info">
-							<?php echo $totalAreas; ?></span>
+							<span class="glyphicon glyphicon-comment"></span>
+							Περιοχές προς έγκριση <span class="label label-info"><?php echo $totalAreas; ?></span></h3>
+						
 					</div>
 					<div class="panel-body">
 						<ul class="list-group">
@@ -35,13 +34,15 @@
 							<li class="list-group-item">
 								<div class="row">
 									<div class="col-xs-2 col-md-1">
-										<img src="http://1.s3.envato.com/files/54262369/Map-Generator-with-Real-3D-Markers-preview-80-x-80.png" class="img-circle img-responsive" alt="" /></div>
+										<a href="<?php echo base_url('index.php/areas/details/'.$area['area_id']); ?>">
+											<img src="http://1.s3.envato.com/files/54262369/Map-Generator-with-Real-3D-Markers-preview-80-x-80.png" class="img-circle img-responsive" alt="" /></div>
+										</a>
 									<div class="col-xs-10 col-md-11">
 										<div>
 											<a href="<?php echo base_url('index.php/areas/details/'.$area['area_id']); ?>">
 												<?php echo $area['area_name']; ?></a>
 											<div class="mic-info">
-												Από: <a href="#"><?php echo $area['company_name']; ?></a> στις <?php echo $area['message_creation_timestamp']; ?>
+												Από: <a href="<?php echo base_url('index.php/company/info/'.$area['company_id']); ?>"><?php echo $area['company_name']; ?></a> στις <?php echo $area['message_creation_timestamp']; ?>
 											</div>
 										</div>
 										<div class="comment-text">
