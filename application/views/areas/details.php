@@ -15,7 +15,11 @@
 			<div class="col-md-12">
 				<h1>ViThess
 					<span class="pull-right">
+						<?php if($user_company_id=="") { ?>
+						<a href="<?php echo base_url("index.php/dashboard"); ?>" class="btn btn-default">Περιοχές</a>
+						<?php } else { ?>
 						<a href="<?php echo base_url("index.php/homepage"); ?>" class="btn btn-default">Περιοχές</a>
+						<?php } ?>
 						<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a>
 						<a href="<?php echo base_url("index.php/areas/create"); ?>" class="btn btn-lg btn-primary">
 							<span class="glyphicon glyphicon-plus"></span> Δημιουργία</a>

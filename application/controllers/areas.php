@@ -15,6 +15,7 @@ class Areas extends CI_Controller {
 		
 		$data = array(
 			'tiles' => $tiles,
+			'user_company_id' => $this->session->userdata('user_company_id'),
 			'area_tiles' => $area_tiles,
 			'message' => $message
 		);

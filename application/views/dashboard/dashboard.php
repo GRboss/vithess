@@ -35,10 +35,10 @@
 							<li class="list-group-item">
 								<div class="row">
 									<div class="col-xs-2 col-md-1">
-										<img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+										<img src="http://1.s3.envato.com/files/54262369/Map-Generator-with-Real-3D-Markers-preview-80-x-80.png" class="img-circle img-responsive" alt="" /></div>
 									<div class="col-xs-10 col-md-11">
 										<div>
-											<a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+											<a href="<?php echo base_url('index.php/areas/details/'.$area['area_id']); ?>">
 												<?php echo $area['area_name']; ?></a>
 											<div class="mic-info">
 												Από: <a href="#"><?php echo $area['company_name']; ?></a> στις <?php echo $area['message_creation_timestamp']; ?>
@@ -49,13 +49,10 @@
 											<?php echo $area['message_text']; ?>
 										</div>
 										<div class="action">
-											<button type="button" class="btn btn-primary btn-xs" title="Edit">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
-											<button type="button" class="btn btn-success btn-xs" title="Approved">
+											<button type="button" class="btn btn-success btn-xs" title="Αποδοχή">
 												<span class="glyphicon glyphicon-ok"></span>
 											</button>
-											<button type="button" class="btn btn-danger btn-xs" title="Delete">
+											<button type="button" class="btn btn-danger btn-xs" title="Διαγραφή">
 												<span class="glyphicon glyphicon-trash"></span>
 											</button>
 										</div>
