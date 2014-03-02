@@ -1,9 +1,11 @@
 <link href="<?php echo base_url(); ?>css/homepage.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/areas/create.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>js/jquery-ui-1.10.4.custom/css/start/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="<?php echo base_url(); ?>js/map.js"></script>
 <script src="<?php echo base_url(); ?>js/areas/create.js"></script>
+<script src="<?php echo base_url(); ?>js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 </head>
 <body>
 	<?php
