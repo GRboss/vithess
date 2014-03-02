@@ -22,9 +22,10 @@ class Dashboard extends CI_Controller {
 		
 		$data = array(
 			'areas' => $areas,
+			'totalAreas' => $config['total_rows'],
 			'pagination' => $this->pagination->create_links()
 		);
-		//print_r($data);
+		
 		$this->load->view('_top');
 		$this->load->view('dashboard/dashboard',$data);
 		$this->load->view('_bottom');

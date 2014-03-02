@@ -33,12 +33,13 @@ class Areas_model extends CI_Model {
 	function load_areas($state_id,$company_id,$offset,$limit) {
 		if($state_id>0) {
 			$query = $this->db->query("
-				SELECT areas.*,messages.*,area_id,count(tile_id) AS total_tiles,sum(tile_price) AS sum_price
-				FROM areas,messages,tiles_to_areas,tiles
+				SELECT areas.*,messages.*,area_id,count(tile_id) AS total_tiles,sum(tile_price) AS sum_price,companies.*
+				FROM areas,messages,tiles_to_areas,tiles,companies
 				where message_area_id=area_id
 				AND tile_to_area_area_id=area_id
 				AND tile_id=tile_to_area_tile_id
-				AND area_company_id".($company_id==0 ? " IS NULL" : "=".$company_id)."
+				AND area_company_id".($company_id==0 ? ">0" : "=".$company_id)."
+				AND company_id=area_company_id
 				AND area_state_id=".$state_id."
 				AND area_active=1
 				GROUP BY area_id
@@ -46,18 +47,6 @@ class Areas_model extends CI_Model {
 				LIMIT ".$offset.",".$limit."
 			");
 		} else {
-			echo "
-				SELECT areas.*,messages.*,area_id,count(tile_id) AS total_tiles,sum(tile_price) AS sum_price
-				FROM areas,messages,tiles_to_areas,tiles
-				where message_area_id=area_id
-				AND tile_to_area_area_id=area_id
-				AND tile_id=tile_to_area_tile_id
-				AND area_company_id".($company_id==0 ? " IS NULL" : "=".$company_id)."
-				AND area_active=1
-				GROUP BY area_id
-				ORDER BY area_timestamp_start DESC
-				LIMIT ".$offset.",".$limit."
-			";
 			$query = $this->db->query("
 				SELECT areas.*,messages.*,area_id,count(tile_id) AS total_tiles,sum(tile_price) AS sum_price
 				FROM areas,messages,tiles_to_areas,tiles

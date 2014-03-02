@@ -18,7 +18,7 @@ class Homepage extends CI_Controller {
 
 		$this->pagination->initialize($config); 
 		
-		$areas = $this->Areas_model->load_areas(0,$this->session->userdata('user_company_id'),$page*$config['per_page'],$config['per_page']);
+		$areas = $this->Areas_model->load_areas(0,$this->session->userdata('user_company_id'),$page,$config['per_page']);
 		
 		$data = array(
 			'areas' => $areas,
