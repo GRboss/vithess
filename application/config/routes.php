@@ -38,6 +38,7 @@
 |
 */
 
+$route['api/(:any)/(:num)/(:num)/(:num)/(:num)'] = "api/$1/$2/$3/$4/$5";
 $route['company/(:any)/(:any)'] = "company/$1/$2";
 $route['areas/(:any)/(:any)'] = "areas/$1/$2";
 $route['areas/(:any)'] = "areas/$1";
