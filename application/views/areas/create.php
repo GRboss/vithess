@@ -61,24 +61,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="">
-		<?php
-		/*$pin=array();
-		for($i=0; $i<count($tiles); $i++) {
-			if(!isset($pin[intval($tiles[$i]['tile_pos_row'])])) {
-				$pin[intval($tiles[$i]['tile_pos_row'])] = array();
-				$i--;
-			} else {
-				$pin[intval($tiles[$i]['tile_pos_row'])][intval($tiles[$i]['tile_pos_col'])] = array(
-					'point' => $tiles[$i]['tile_lat'].','.$tiles[$i]['tile_long'],
-					'price' => $tiles[$i]['tile_price'],
-					'tile_id' => $tiles[$i]['tile_id'],
-					'in_area' => 0
-				);
-			}
-		}*/
-		
-		?>
+	<div class="hidden">
 		<script type="text/javascript">
 			$( document ).ready(function() {
 				TILES = [];
