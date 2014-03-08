@@ -22,7 +22,7 @@ class Homepage extends CI_Controller {
 		
 		$data = array(
 			'areas' => $areas,
-			'user_company_id' => $this->session_userdata('user_company_id'),
+			'user_company_id' => $this->session->userdata('user_company_id'),
 			'pagination' => $this->pagination->create_links()
 		);
 		

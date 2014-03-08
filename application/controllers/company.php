@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Company extends CI_Controller {
 	public function index() {
 		
 	}
 	
 	public function info($company_id) {
+		$this->load->library('pagination');
 		$this->load->model('Areas_model');
 		
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3)-1 : 0;
