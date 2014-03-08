@@ -21,8 +21,10 @@
 						<a href="<?php echo base_url("index.php/homepage"); ?>" class="btn btn-default">Περιοχές</a>
 						<?php } ?>
 						<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a>
+						<?php if($user_company_id!="") { ?>
 						<a href="<?php echo base_url("index.php/areas/create"); ?>" class="btn btn-lg btn-primary">
 							<span class="glyphicon glyphicon-plus"></span> Δημιουργία</a>
+						<?php } ?>
 					</span>
 				</h1>
 			</div>
