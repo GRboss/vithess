@@ -63,7 +63,7 @@
 	</div>
 	<div class="">
 		<?php
-		$pin=array();
+		/*$pin=array();
 		for($i=0; $i<count($tiles); $i++) {
 			if(!isset($pin[intval($tiles[$i]['tile_pos_row'])])) {
 				$pin[intval($tiles[$i]['tile_pos_row'])] = array();
@@ -76,7 +76,7 @@
 					'in_area' => 0
 				);
 			}
-		}
+		}*/
 		
 		?>
 		<script type="text/javascript">
@@ -84,30 +84,29 @@
 				TILES = [];
 				var rectangle = null;
 				<?php
-				for($i=1; $i<count($pin); $i++) {
-					for($j=1; $j<count($pin[0]); $j++) {
+				for($i=0; $i<count($tiles); $i++) {
+					$tiles[$i]['in_area'] = 0;
 				?>
-						rectangle = new google.maps.Rectangle({
-							strokeColor: '#FF0000',
-							strokeOpacity: 0.8,
-							strokeWeight: 2,
-							fillColor: '#FF0000',
-							fillOpacity: <?php echo $pin[$i-1][$j]['in_area']==1 ? 0.5 : 0.1 ?>,
-							map: MAP,
-							bounds: new google.maps.LatLngBounds(
-								new google.maps.LatLng(<?php echo $pin[$i][$j-1]['point']; ?>),
-								new google.maps.LatLng(<?php echo $pin[$i-1][$j]['point']; ?>)
-							),
-							GL: {
-								tile_id: <?php echo $pin[$i-1][$j]['tile_id']; ?>,
-								price: <?php echo $pin[$i-1][$j]['price']; ?>,
-								in_area: <?php echo $pin[$i-1][$j]['in_area']; ?>
-							}
-						});
-						
-						 TILES.push(rectangle);
+					rectangle = new google.maps.Rectangle({
+						strokeColor: '#FF0000',
+						strokeOpacity: 0.8,
+						strokeWeight: 2,
+						fillColor: '#FF0000',
+						fillOpacity: <?php echo $tiles[$i]['in_area']==1 ? 0.5 : 0.1 ?>,
+						map: MAP,
+						bounds: new google.maps.LatLngBounds(
+							new google.maps.LatLng(<?php echo $tiles[$i]['tile_bl_lat'].','.$tiles[$i]['tile_bl_long']; ?>),
+							new google.maps.LatLng(<?php echo $tiles[$i]['tile_tr_lat'].','.$tiles[$i]['tile_tr_long']; ?>)
+						),
+						GL: {
+							tile_id: <?php echo $tiles[$i]['tile_id']; ?>,
+							price: <?php echo $tiles[$i]['tile_price']; ?>,
+							in_area: <?php echo $tiles[$i]['in_area']; ?>
+						}
+					});
+
+					TILES.push(rectangle);
 				<?php
-					}
 				}
 				?>		
 				

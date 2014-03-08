@@ -15,7 +15,7 @@ class Tiles_model extends CI_Model {
 			SELECT *
 			FROM tiles
 			WHERE tile_active=1
-			ORDER BY tile_pos_row,tile_pos_col
+			ORDER BY tile_id ASC;
 		");
 		$result = array();
 		if ($query->num_rows() > 0) {
