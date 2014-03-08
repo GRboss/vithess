@@ -36,7 +36,7 @@ class Api_model extends CI_Model {
 			
 			$this->add_view($person_id,$row['message_id']);
 		}
-		return json_encode($result);
+		return $result;
 	}
 	
 	private function get_views($message_id) {
@@ -126,6 +126,53 @@ class Api_model extends CI_Model {
 			default :
 				$result['success'] = 0;
 		}
+		
+		return $result;
+	}
+	
+	function create_new_message($latitude,$longitude,$user_id,$message_title,$message_text) {
+		$person_id = $this->get_person_id($user_id);
+		
+		$dateTime = new DateTime("now", new DateTimeZone('Europe/Athens'));
+		$now = $dateTime->format("Y-m-d H:i:s");
+		
+		$this->db->query("
+			INSERT INTO messages (message_person_id,message_title,message_text,message_lat,message_long,message_creation_timestamp)
+			VALUES (".$person_id.",'".$message_title."','".$message_text."',".$latitude.",".$longitude.",'".$now."')
+		");
+		
+		$result = array(
+			'success' => 1
+		);
+		
+		return $result;
+	}
+	
+	function save_my_settings($user_id,$category_ids,$notifications_active) {
+		$person_id = $this->get_person_id($user_id);
+		
+		$this->db->query("
+			UPDATE persons
+			SET person_notifications_active=".$notifications_active."
+			WHERE person_id=".$person_id."
+		");
+		
+		$this->db->query("
+			DELETE FROM persons_to_categories
+			WHERE person_to_category_person_id=".$person_id."
+		");
+		
+		$ids = explode(",", $category_ids);
+		for($i=0; $i<count($ids); $i++) {
+			$this->db->query("
+				INSERT INTO persons_to_categories (person_to_category_person_id,person_to_category_category_id)
+				VALUES (".$person_id.",".$ids[$i].")
+			");
+		}
+		
+		$result = array(
+			'success' => 1
+		);
 		
 		return $result;
 	}

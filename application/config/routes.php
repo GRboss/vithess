@@ -40,6 +40,8 @@
 
 $route['api/get_messages/(:num)/(:num)/(:num)/(:num)'] = "api/get_messages/$1/$2/$3/$4";
 $route['api/rate_the_message/(:num)/(:num)/(:num)'] = "api/rate_the_message/$1/$2/$3";
+$route['api/create_new_message'] = "api/create_new_message";
+$route['api/save_my_settings'] = "api/save_my_settings";
 $route['company/(:any)/(:any)'] = "company/$1/$2";
 $route['areas/(:any)/(:any)'] = "areas/$1/$2";
 $route['areas/(:any)'] = "areas/$1";
