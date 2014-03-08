@@ -176,4 +176,38 @@ class Api_model extends CI_Model {
 		
 		return $result;
 	}
+	
+	function get_me_my_settings($user_id) {
+		$person_id = $this->get_person_id($user_id);
+		
+		$result = array(
+			'notifications_active' => 0,
+			'categories' => array()
+		);
+		
+		$query = $this->db->query("
+			SELECT person_notifications_active
+			FROM persons
+			WHERE person_id=".$person_id."
+		");
+		$row = $query->result_array();
+		$result['notifications_active'] = $row[0]['person_notifications_active'];
+		
+		$query = $this->db->query("
+			SELECT *
+			FROM categories LEFT JOIN persons_to_categories
+			ON categories.category_id=persons_to_categories.person_to_category_category_id
+			AND person_to_category_person_id=".$user_id."
+		");
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$result['categories'][] = array(
+					'category_name' => $row['category_name'],
+					'in_use' => ($row['person_to_category_id']=='' ? 0:1)
+				);
+			}
+		}
+		
+		return $result;
+	}
 }

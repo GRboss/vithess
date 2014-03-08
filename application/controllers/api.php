@@ -49,5 +49,12 @@ class Api extends CI_Controller {
 		
 		echo json_encode($result);
 	}
+	
+	public function get_me_my_settings($user_id) {
+		$this->load->model('api_model');
+		$result = $this->api_model->get_me_my_settings($user_id);
+		
+		echo json_encode($result);
+	}
 }
 
