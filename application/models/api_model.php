@@ -54,6 +54,7 @@ class Api_model extends CI_Model {
 	private function add_view($person_id,$message_id) {
 		$dateTime = new DateTime("now", new DateTimeZone('Europe/Athens'));
 		$now = $dateTime->format("Y-m-d H:i:s");
+		
 		$this->db->query("
 			INSERT INTO views(view_person_id,view_message_id,view_timestamp)
 			VALUES (".$person_id.",".$message_id.",'".$now."')
@@ -90,5 +91,42 @@ class Api_model extends CI_Model {
 		$row = $query->result_array();
 		if($query->num_rows>0) return intval($row[0]['total']);
 		else return 0;
+	}
+	
+	
+	function rate_the_message($user_id,$message_id,$rating) {
+		$person_id = $this->get_person_id($user_id);
+		
+		$dateTime = new DateTime("now", new DateTimeZone('Europe/Athens'));
+		$now = $dateTime->format("Y-m-d H:i:s");
+		
+		$result = array(
+			'success' => 1
+		);
+		
+		switch ($rating) {
+			case 'like':
+				$this->db->query("
+					INSERT INTO votes (vote_person_id,vote_message_id,vote_vote)
+					VALUES (".$person_id.",".$message_id.",1)
+				");
+				break;
+			case 'dislike':
+				$this->db->query("
+					INSERT INTO votes (vote_person_id,vote_message_id,vote_vote)
+					VALUES (".$person_id.",".$message_id.",-1)
+				");
+				break;
+			case 'report':
+				$this->db->query("
+					INSERT INTO reports (report_person_id,report_message_id,report_timestamp)
+					VALUES (".$person_id.",".$message_id.",'".$now."')
+				");
+				break;
+			default :
+				$result['success'] = 0;
+		}
+		
+		return $result;
 	}
 }
