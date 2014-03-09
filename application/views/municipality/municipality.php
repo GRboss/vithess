@@ -4,6 +4,9 @@
 <body>
 	<div class="container">
 		<div class="row">
+			<p style="text-align: center; font-size: 40px;">
+				<a href="<?php echo base_url(); ?>" class="site-name">ViThess</a>
+			</p>
 			<div class="col-md-12">
 				<div class="pr-wrap">
 					<div class="pass-reset">
@@ -42,5 +45,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div>
+		<div class="posted-by">2014 - Apps for Greece</div>
 	</div>

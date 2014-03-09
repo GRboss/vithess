@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>ViThess
+				<h1><a href="<?php echo base_url(); ?>">ViThess</a>
 					<span class="pull-right">
 						<?php if($user_company_id=="") { ?>
 						<a href="<?php echo base_url("index.php/dashboard"); ?>" class="btn btn-default">Περιοχές</a>

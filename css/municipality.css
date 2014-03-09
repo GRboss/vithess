@@ -1,6 +1,6 @@
 body
 {
-    background: url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed;
+    background: url('http://seaway.com.gr/wordpress/wp-content/uploads/2014/02/17349f8b166bd3625a5941020412a8e2.jpg') fixed;
     background-size: cover;
     padding: 0;
     margin: 0;
@@ -178,4 +178,13 @@ form.login a:hover
     background-color: rgba(0, 0, 0, 0.66);
     padding: 10px;
     left: 45%;
+}
+
+a.site-name {
+	color: white;
+	text-shadow: 0px 1px 2px black;
+}
+
+a.site-name:hover {
+	text-decoration: none;
 }

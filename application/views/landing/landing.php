@@ -8,7 +8,7 @@
 
 				<div class="masthead clearfix">
 					<div class="inner">
-						<h3 class="masthead-brand">ViThess</h3>
+						<h3 class="masthead-brand"><a href="<?php echo base_url(); ?>">ViThess</a></h3>
 						<ul class="nav masthead-nav">
 							<li class="active"><a href="#">Αρχική</a></li>
 							<li><a href="index.php/enterprises">Επιχειρήσεις</a></li>
@@ -21,7 +21,7 @@
 				
 
 				<div class="inner cover">
-					<h1 class="cover-heading">Cover your page.</h1>
+					<h1 class="cover-heading">ViThess</h1>
 					<p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
 					<p class="lead">
 						<a href="#" class="btn btn-lg btn-default">Learn more</a>
@@ -30,7 +30,7 @@
 
 				<div class="mastfoot">
 					<div class="inner">
-						<p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+						<p>2014 - Apps for Greece</p>
 					</div>
 				</div>
 
