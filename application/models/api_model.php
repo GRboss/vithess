@@ -20,6 +20,7 @@ class Api_model extends CI_Model {
 			AND tile_to_area_tile_id=tile_id
 			AND tile_to_area_area_id=area_id
 			AND message_area_id=area_id
+			AND area_state_id=2
 			ORDER BY message_creation_timestamp DESC
 		");
 		$result = array();

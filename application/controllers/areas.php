@@ -57,4 +57,21 @@ class Areas extends CI_Controller {
 		));
 		header("Location: ".  base_url("index.php/homepage"));
 	}
+	
+	public function action($content) {
+		$parts = explode("_", $content);
+		
+		if($parts[0]=='yes') {
+			$state_id=2;
+		} else if($parts[0]=='no') {
+			$state_id=3;
+		} else {
+			$state_id='';
+		}
+		
+		$this->load->model('Areas_model');
+		$this->Areas_model->action($state_id,$parts[1]);
+		
+		
+	}
 }

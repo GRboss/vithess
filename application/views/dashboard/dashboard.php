@@ -1,4 +1,6 @@
 <link href="<?php echo base_url(); ?>css/homepage.css" rel="stylesheet">
+
+<script src="<?php echo base_url(); ?>js/dashboard.js"></script>
 </head>
 <body>
 	<?php
@@ -50,10 +52,10 @@
 											<?php echo $area['message_text']; ?>
 										</div>
 										<div class="action">
-											<button type="button" class="btn btn-success btn-xs" title="Αποδοχή">
+											<button type="button" class="btn btn-success btn-xs actionButton" content="yes_<?php echo $area['area_id']; ?>" title="Αποδοχή">
 												<span class="glyphicon glyphicon-ok"></span>
 											</button>
-											<button type="button" class="btn btn-danger btn-xs" title="Διαγραφή">
+											<button type="button" class="btn btn-danger btn-xs actionButton" content="no_<?php echo $area['area_id']; ?>" title="Διαγραφή">
 												<span class="glyphicon glyphicon-trash"></span>
 											</button>
 										</div>

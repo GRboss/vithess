@@ -140,4 +140,14 @@ class Areas_model extends CI_Model {
 			");
 		}
 	}
+	
+	function action($state_id,$area_id) {
+		if(is_int($state_id)) {
+			$this->db->query("
+				UPDATE areas
+				SET area_state_id=".$state_id."
+				WHERE area_id=".$area_id."
+			");
+		}
+	}
 }
