@@ -69,6 +69,19 @@ class Areas_model extends CI_Model {
 		return $result;
 	}
 	
+	function get_message_votes($message_id,$vote) {
+		$query = $this->db->query("
+			SELECT vote_message_id,COUNT(vote_id) AS total
+			FROM votes
+			WHERE vote_message_id=".$message_id."
+			AND vote_vote=".$vote."
+			GROUP BY vote_message_id
+		");
+		$row = $query->result_array();
+		if($query->num_rows>0) return intval($row[0]['total']);
+		else return 0;
+	}
+	
 	function get_area_tiles($area_id) {
 		$query = $this->db->query("
 			SELECT tiles.*
@@ -197,5 +210,16 @@ class Areas_model extends CI_Model {
 				WHERE report_id=".$report_id."
 			");
 		}
+	}
+	
+	function get_state_name($area_id) {
+		$query = $this->db->query("
+			SELECT state_name
+			FROM areas,states
+			WHERE area_id=".$area_id."
+			AND state_id=area_state_id
+		");
+		$row = $query->result_array();
+		return $row[0]['state_name'];
 	}
 }

@@ -4,3 +4,7 @@
 a.visitor i,.visitor h4.list-group-item-heading { color:#E48A07; height:62px; font-size: 66px;}
 a.visitor:hover { background-color:#E48A07; }
 a.visitor:hover * { color:#FFF; }
+
+.dis-likes {
+	font-size: 30px;
+}

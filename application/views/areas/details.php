@@ -33,7 +33,7 @@
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo $message['message_title']; ?></h3>
+						<h3 class="panel-title"><?php echo $message['message_title']; ?> <small><?php echo $state_name; ?></small></h3>
 					</div>
 					<div class="panel-body">
 						<i><?php echo $message['message_teaser']; ?></i>
@@ -44,13 +44,29 @@
 			</div>
 			<div class="col-md-4">
 				<div class="list-group">
-					<a href="http://www.jquery2dotnet.com" class="list-group-item visitor">
+					<a href="#" class="list-group-item visitor">
 						<h3 class="pull-right">
 							<i class="fa fa-eye"></i>
 						</h3>
 						<h4 class="list-group-item-heading count">
 							<?php echo $message['message_views']; ?></h4>
 					</a>
+					<table border="0" width="100%">
+						<tr>
+							<td width="50%">
+								<p class="bg-primary" align="center">
+									Αρέσει σε<br/>
+									<span class="dis-likes"><?php echo $votes_up; ?></span>
+								</p>
+							</td>
+							<td width="50%">
+								<p class="bg-danger" align="center">
+									Δεν αρέσει σε<br/>
+									<span class="dis-likes"><?php echo $votes_down; ?></span>
+								</p>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>

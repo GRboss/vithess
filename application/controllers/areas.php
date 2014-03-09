@@ -12,12 +12,16 @@ class Areas extends CI_Controller {
 		$tiles = $this->Tiles_model->load_tiles();
 		$area_tiles = $this->Areas_model->get_area_tiles($area_id);
 		$message = $this->Areas_model->get_area_message($area_id);
+		$state_name = $this->Areas_model->get_state_name($area_id);
 		
 		$data = array(
 			'tiles' => $tiles,
 			'user_company_id' => $this->session->userdata('user_company_id'),
 			'area_tiles' => $area_tiles,
-			'message' => $message
+			'message' => $message,
+			'votes_up' => $this->Areas_model->get_message_votes($message['message_id'],1),
+			'votes_down' => $this->Areas_model->get_message_votes($message['message_id'],-1),
+			'state_name' => $state_name
 		);
 		
 		$this->load->view('_top');
