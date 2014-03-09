@@ -150,4 +150,52 @@ class Areas_model extends CI_Model {
 			");
 		}
 	}
+	
+	function load_reports() {
+		$query = $this->db->query("
+			SELECT *
+			FROM reports,areas,messages,companies
+			WHERE message_id=report_message_id
+			AND area_id=message_area_id
+			AND company_id=area_company_id
+		");
+		$result = array();
+		if($query->num_rows > 0) {
+			foreach ($query->result_array() as $row) {
+				$result[] = array(
+					'report_id' => $row['report_id'],
+					'area_id' => $row['area_id'],
+					'area_name' => $row['area_name'],
+					'company_id' => $row['company_id'],
+					'company_name' => $row['company_name'],
+					'message_creation_timestamp' => $row['message_creation_timestamp'],
+					'message_id' => $row['message_id'],
+					'message_title' => $row['message_title'],
+					'message_teaser' => $row['message_teaser'],
+					'message_text' => $row['message_text']
+				);
+			}
+		}
+		return $result;
+	}
+	
+	function action_reported($verdict,$area_id,$report_id) {
+		if($verdict=='accepted') {
+			$this->db->query("
+				UPDATE areas
+				SET area_state_id=4
+				WHERE area_id=".$area_id."
+			");
+			
+			$this->db->query("
+				DELETE FROM reports
+				WHERE report_id=".$report_id."
+			");
+		} else if($verdict=='rejected') {
+			$this->db->query("
+				DELETE FROM reports
+				WHERE report_id=".$report_id."
+			");
+		}
+	}
 }

@@ -38,6 +38,8 @@
 |
 */
 
+$route['reported/(:any)/(:any)'] = "reported/$1/$2";
+$route['reported'] = "reported";
 $route['api/get_messages/(:num)/(:num)/(:num)/(:num)'] = "api/get_messages/$1/$2/$3/$4";
 $route['api/rate_the_message/(:num)/(:num)/(:num)'] = "api/rate_the_message/$1/$2/$3";
 $route['api/create_new_message'] = "api/create_new_message";
