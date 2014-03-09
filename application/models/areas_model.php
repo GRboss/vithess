@@ -95,9 +95,25 @@ class Areas_model extends CI_Model {
 		");
 		if ($query->num_rows() > 0) {
 			$result = $query->result_array();
+			$result[0]['message_views'] = $this->get_message_views($result[0]['message_id']);
 			return $result[0];
 		} else {
 			return array();
+		}
+	}
+	
+	function get_message_views($message_id) {
+		$query = $this->db->query("
+			SELECT view_message_id,COUNT(view_person_id) as total
+			FROM views
+			WHERE view_message_id=".$message_id."
+			GROUP BY view_message_id
+		");
+		if ($query->num_rows() > 0) {
+			$result = $query->result_array();
+			return intval($result[0]['total']);
+		} else {
+			return 0;
 		}
 	}
 	
