@@ -21,11 +21,14 @@ class Api_model extends CI_Model {
 			AND tile_to_area_area_id=area_id
 			AND message_area_id=area_id
 			AND area_state_id=2
+			AND message_user_type_id=".$category_id."
 			ORDER BY message_creation_timestamp DESC
 		");
-		$result = array();
+		$result = array(
+			'messages' => array()
+		);
 		foreach ($query->result_array() as $row) {
-			$result[] = array(
+			$result['messages'][] = array(
 				'message_id' => $row['message_id'],
 				'message_title' => $row['message_title'],
 				'message_teaser' => $row['message_teaser'],
