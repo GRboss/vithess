@@ -9,37 +9,111 @@ class Api_model extends CI_Model {
 		parent::__construct();
 	}
 	
+	private function distance($lat1, $lng1, $lat2, $lng2, $miles = true) {
+		$pi80 = M_PI / 180;
+		$lat1 *= $pi80;
+		$lng1 *= $pi80;
+		$lat2 *= $pi80;
+		$lng2 *= $pi80;
+
+		$r = 6372.797; // mean radius of Earth in km
+		$dlat = $lat2 - $lat1;
+		$dlng = $lng2 - $lng1;
+		$a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlng / 2) * sin($dlng / 2);
+		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+		$km = $r * $c;
+
+		return ($miles ? ($km * 0.621371192) : $km);
+	}
+			
 	function get_messages($lat,$long,$user_id,$category_id) {
 		$person_id = $this->get_person_id($user_id);
 		
-		$query = $this->db->query("
-			SELECT *
-			FROM tiles,areas,tiles_to_areas,messages
-			WHERE (tile_bl_lat<='".$lat."' AND tile_bl_long<='".$long."')
-			AND (tile_tr_lat>='".$lat."' AND tile_tr_long>='".$long."')
-			AND tile_to_area_tile_id=tile_id
-			AND tile_to_area_area_id=area_id
-			AND message_area_id=area_id
-			AND area_state_id=2
-			AND message_user_type_id=".$category_id."
-			ORDER BY message_creation_timestamp DESC
-		");
 		$result = array(
 			'messages' => array()
 		);
-		foreach ($query->result_array() as $row) {
-			$result['messages'][] = array(
-				'message_id' => $row['message_id'],
-				'message_title' => $row['message_title'],
-				'message_teaser' => $row['message_teaser'],
-				'message_text' => $row['message_text'],
-				'message_views' => $this->get_views($row['message_id']),
-				'message_up_votes' => $this->get_message_votes($row['message_id'],1),
-				'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
-			);
+		
+		if($category_id==2) {
+			$query = $this->db->query("
+				SELECT *
+				FROM tiles,areas,tiles_to_areas,messages,users,companies
+				WHERE (tile_bl_lat<='".$lat."' AND tile_bl_long<='".$long."')
+				AND (tile_tr_lat>='".$lat."' AND tile_tr_long>='".$long."')
+				AND tile_to_area_tile_id=tile_id
+				AND tile_to_area_area_id=area_id
+				AND message_area_id=area_id
+				AND area_state_id=2
+				AND message_user_type_id=".$category_id."
+				AND user_id=message_user_id
+				AND company_id=user_company_id
+				ORDER BY message_creation_timestamp DESC
+			");
 			
-			$this->add_view($person_id,$row['message_id']);
+			foreach ($query->result_array() as $row) {
+				$result['messages'][] = array(
+					'message_id' => $row['message_id'],
+					'message_title' => $row['message_title'],
+					'message_teaser' => $row['message_teaser'],
+					'message_text' => $row['message_text'],
+					'message_views' => $this->get_views($row['message_id']),
+					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
+					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
+					'distance' => $this->distance($lat, $long, $row['company_lat'], $row['company_long'], FALSE)
+				);
+				$this->add_view($person_id,$row['message_id']);
+			}
+		} else if($category_id==3) {
+			$query = $this->db->query("
+				SELECT *
+				FROM tiles,areas,tiles_to_areas,messages
+				WHERE (tile_bl_lat<='".$lat."' AND tile_bl_long<='".$long."')
+				AND (tile_tr_lat>='".$lat."' AND tile_tr_long>='".$long."')
+				AND tile_to_area_tile_id=tile_id
+				AND tile_to_area_area_id=area_id
+				AND message_area_id=area_id
+				AND area_state_id=2
+				AND message_user_type_id=".$category_id."
+				ORDER BY message_creation_timestamp DESC
+			");
+			
+			foreach ($query->result_array() as $row) {
+				$result['messages'][] = array(
+					'message_id' => $row['message_id'],
+					'message_title' => $row['message_title'],
+					'message_teaser' => $row['message_teaser'],
+					'message_text' => $row['message_text'],
+					'message_views' => $this->get_views($row['message_id']),
+					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
+					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
+					'distance' => (empty($row['distance']) ? -1: $row['distance'])
+				);
+				$this->add_view($person_id,$row['message_id']);
+			}
+		} else if($category_id==1) {
+			$query = $this->db->query("
+				SELECT * FROM (SELECT *, (((acos(sin((".$lat."*pi()/180)) *
+				sin((message_lat*pi()/180))+cos((".$lat."*pi()/180)) *
+				cos((message_lat*pi()/180)) * cos(((".$long."-
+				message_long)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance
+				FROM messages)myTable WHERE distance <= 9999999999999
+				ORDER BY distance ASC
+			");
+			
+			foreach ($query->result_array() as $row) {
+				$result['messages'][] = array(
+					'message_id' => $row['message_id'],
+					'message_title' => $row['message_title'],
+					'message_teaser' => $row['message_teaser'],
+					'message_text' => $row['message_text'],
+					'message_views' => $this->get_views($row['message_id']),
+					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
+					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
+					'distance' => (empty($row['distance']) ? -1: $row['distance'])
+				);
+				$this->add_view($person_id,$row['message_id']);
+			}
 		}
+		
 		return $result;
 	}
 	
