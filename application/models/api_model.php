@@ -95,7 +95,9 @@ class Api_model extends CI_Model {
 				sin((message_lat*pi()/180))+cos((".$lat."*pi()/180)) *
 				cos((message_lat*pi()/180)) * cos(((".$long."-
 				message_long)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance
-				FROM messages)myTable WHERE distance <= 9999999999999
+				FROM messages)myTable,persons
+				WHERE distance <= 9999999999999
+				AND person_id=message_person_id
 				ORDER BY distance ASC
 			");
 			
@@ -108,7 +110,8 @@ class Api_model extends CI_Model {
 					'message_views' => $this->get_views($row['message_id']),
 					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
 					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
-					'distance' => (empty($row['distance']) ? -1: $row['distance'])
+					'distance' => (empty($row['distance']) ? -1: $row['distance']),
+					'person_username' => $row['person_username']
 				);
 				$this->add_view($person_id,$row['message_id']);
 			}
@@ -140,7 +143,7 @@ class Api_model extends CI_Model {
 	}
 
 
-	private function get_person_id($facebook_id) {
+	private function get_person_id($facebook_id,$user_username='') {
 		$query = $this->db->query("
 			SELECT *
 			FROM persons
@@ -151,8 +154,8 @@ class Api_model extends CI_Model {
 			return intval($row[0]['person_id']);
 		} else {
 			$this->db->query("
-				INSERT INTO persons(person_facebook_id)
-				VALUES ('".$facebook_id."')
+				INSERT INTO persons(person_facebook_id,person_username)
+				VALUES ('".$facebook_id."','".$user_username."')
 			");
 			return $this->get_person_id($facebook_id);
 		}
@@ -208,8 +211,8 @@ class Api_model extends CI_Model {
 		return $result;
 	}
 	
-	function create_new_message($latitude,$longitude,$user_id,$message_title,$message_text) {
-		$person_id = $this->get_person_id($user_id);
+	function create_new_message($latitude,$longitude,$user_id,$user_username,$message_title,$message_text) {
+		$person_id = $this->get_person_id($user_id,$user_username);
 		
 		$dateTime = new DateTime("now", new DateTimeZone('Europe/Athens'));
 		$now = $dateTime->format("Y-m-d H:i:s");

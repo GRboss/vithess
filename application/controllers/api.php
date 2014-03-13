@@ -26,12 +26,13 @@ class Api extends CI_Controller {
 		$message_text = $this->input->post('message_text');*/
 		$latitude = 44;
 		$longitude = 22;
-		$user_id = 154;
-		$message_title = 'Thunder';
-		$message_text = 'Road';
+		$user_id = 155;
+		$user_username = 'Pelopidas';
+		$message_title = 'Prove it';
+		$message_text = 'all Night';
 		
 		$this->load->model('api_model');
-		$result = $this->api_model->create_new_message($latitude,$longitude,$user_id,$message_title,$message_text);
+		$result = $this->api_model->create_new_message($latitude,$longitude,$user_id,$user_username,$message_title,$message_text);
 		
 		echo json_encode($result);
 	}
