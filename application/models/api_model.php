@@ -110,6 +110,8 @@ class Api_model extends CI_Model {
 					'message_title' => $row['message_title'],
 					'message_teaser' => $row['message_teaser'],
 					'message_text' => $row['message_text'],
+					'message_lat' => $row['message_lat'],
+					'message_long' => $row['message_long'],
 					'message_views' => $this->get_views($row['message_id']),
 					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
 					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
