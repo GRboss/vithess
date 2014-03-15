@@ -52,6 +52,7 @@ class Api_model extends CI_Model {
 			foreach ($query->result_array() as $row) {
 				$result['messages'][] = array(
 					'message_id' => $row['message_id'],
+					'message_creation_timestamp' => $row['message_creation_timestamp'],
 					'message_title' => $row['message_title'],
 					'message_teaser' => $row['message_teaser'],
 					'message_text' => $row['message_text'],
@@ -79,6 +80,7 @@ class Api_model extends CI_Model {
 			foreach ($query->result_array() as $row) {
 				$result['messages'][] = array(
 					'message_id' => $row['message_id'],
+					'message_creation_timestamp' => $row['message_creation_timestamp'],
 					'message_title' => $row['message_title'],
 					'message_teaser' => $row['message_teaser'],
 					'message_text' => $row['message_text'],
@@ -104,6 +106,7 @@ class Api_model extends CI_Model {
 			foreach ($query->result_array() as $row) {
 				$result['messages'][] = array(
 					'message_id' => $row['message_id'],
+					'message_creation_timestamp' => $row['message_creation_timestamp'],
 					'message_title' => $row['message_title'],
 					'message_teaser' => $row['message_teaser'],
 					'message_text' => $row['message_text'],
