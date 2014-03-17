@@ -165,12 +165,17 @@ class Areas_model extends CI_Model {
 	}
 	
 	function load_reports() {
-		$query = $this->db->query("
+		/*$query = $this->db->query("
 			SELECT *
 			FROM reports,areas,messages,companies
 			WHERE message_id=report_message_id
 			AND area_id=message_area_id
 			AND company_id=area_company_id
+		");*/
+		$query = $this->db->query("
+			SELECT *
+			FROM reports,messages LEFT JOIN areas ON message_area_id=area_id
+			WHERE message_id=report_message_id
 		");
 		$result = array();
 		if($query->num_rows > 0) {
@@ -179,8 +184,8 @@ class Areas_model extends CI_Model {
 					'report_id' => $row['report_id'],
 					'area_id' => $row['area_id'],
 					'area_name' => $row['area_name'],
-					'company_id' => $row['company_id'],
-					'company_name' => $row['company_name'],
+					'company_id' => (empty($row['company_id']) ? '' : $row['company_id']),
+					'company_name' => (empty($row['company_name']) ? '' : $row['company_name']),
 					'message_creation_timestamp' => $row['message_creation_timestamp'],
 					'message_id' => $row['message_id'],
 					'message_title' => $row['message_title'],

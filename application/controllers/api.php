@@ -19,7 +19,7 @@ class Api extends CI_Controller {
 	}
 	
 	public function create_new_message() {
-		/*$latitude = $this->input->post('user_longitude');
+		/*$latitude = $this->input->post('user_latitude');
 		$longitude = $this->input->post('user_longitude');
 		$user_id = $this->input->post('user_id');
 		$message_title = $this->input->post('message_title');

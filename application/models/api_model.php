@@ -36,7 +36,7 @@ class Api_model extends CI_Model {
 		if($category_id==2) {
 			$query = $this->db->query("
 				SELECT *
-				FROM tiles,areas,tiles_to_areas,messages,users,companies
+				FROM tiles,areas,tiles_to_areas,messages,users,companies,categories
 				WHERE (tile_bl_lat<='".$lat."' AND tile_bl_long<='".$long."')
 				AND (tile_tr_lat>='".$lat."' AND tile_tr_long>='".$long."')
 				AND tile_to_area_tile_id=tile_id
@@ -47,22 +47,28 @@ class Api_model extends CI_Model {
 				AND user_id=message_user_id
 				AND user_user_type_id=2
 				AND company_id=user_company_id
+				AND category_id=company_category_id
 				ORDER BY message_creation_timestamp DESC
 			");
 			
 			foreach ($query->result_array() as $row) {
-				$result['messages'][] = array(
-					'message_id' => $row['message_id'],
-					'message_creation_timestamp' => $row['message_creation_timestamp'],
-					'message_title' => $row['message_title'],
-					'message_teaser' => $row['message_teaser'],
-					'message_text' => $row['message_text'],
-					'message_views' => $this->get_views($row['message_id']),
-					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
-					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
-					'distance' => $this->distance($lat, $long, $row['company_lat'], $row['company_long'], FALSE)
-				);
-				$this->add_view($person_id,$row['message_id']);
+				if(true || !$this->hasSeenIt($person_id, $row['message_id'])) {
+					$result['messages'][] = array(
+						'message_id' => $row['message_id'],
+						'message_creation_timestamp' => $row['message_creation_timestamp'],
+						'message_title' => $row['message_title'],
+						'message_teaser' => $row['message_teaser'],
+						'message_text' => $row['message_text'],
+						'message_views' => $this->get_views($row['message_id']),
+						'message_up_votes' => $this->get_message_votes($row['message_id'],1),
+						'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
+						'company_name' => $row['company_name'],
+						'company_address' => $row['company_address'],
+						'category_name' => $row['category_name'],
+						'distance' => $this->distance($lat, $long, $row['company_lat'], $row['company_long'], FALSE)
+					);
+					$this->add_view($person_id,$row['message_id']);
+				}
 			}
 		} else if($category_id==3) {
 			/*$query = $this->db->query("
@@ -223,12 +229,14 @@ class Api_model extends CI_Model {
 		
 		switch ($rating) {
 			case 'like':
+				$this->deleteVote($person_id, $message_id);
 				$this->db->query("
 					INSERT INTO votes (vote_person_id,vote_message_id,vote_vote)
 					VALUES (".$person_id.",".$message_id.",1)
 				");
 				break;
 			case 'dislike':
+				$this->deleteVote($person_id, $message_id);
 				$this->db->query("
 					INSERT INTO votes (vote_person_id,vote_message_id,vote_vote)
 					VALUES (".$person_id.",".$message_id.",-1)
@@ -247,6 +255,14 @@ class Api_model extends CI_Model {
 		return $result;
 	}
 	
+	private function deleteVote($person_id,$message_id) {
+		$this->db->query("
+			DELETE FROM votes
+			WHERE vote_person_id=".$person_id."
+			AND vote_message_id=".$message_id."
+		");
+	}
+			
 	function create_new_message($latitude,$longitude,$user_id,$user_username,$message_title,$message_text) {
 		$person_id = $this->get_person_id($user_id,$user_username);
 		
@@ -326,5 +342,17 @@ class Api_model extends CI_Model {
 		}
 		
 		return $result;
+	}
+	
+	private function hasSeenIt($person_id,$message_id) {
+		$query = $this->db->query("
+			SELECT COUNT(view_id) AS total
+			FROM views
+			WHERE view_person_id=".$person_id."
+			AND view_message_id=".$message_id."
+		");
+		$row = $query->result_array();
+		if(intval($row[0]['total'])==0) return false;
+		else return true;
 	}
 }
