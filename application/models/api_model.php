@@ -45,6 +45,7 @@ class Api_model extends CI_Model {
 				AND area_state_id=2
 				AND message_user_type_id=".$category_id."
 				AND user_id=message_user_id
+				AND user_user_type_id=2
 				AND company_id=user_company_id
 				ORDER BY message_creation_timestamp DESC
 			");
@@ -64,15 +65,17 @@ class Api_model extends CI_Model {
 				$this->add_view($person_id,$row['message_id']);
 			}
 		} else if($category_id==3) {
-			$query = $this->db->query("
+			/*$query = $this->db->query("
 				SELECT *
-				FROM tiles,areas,tiles_to_areas,messages
+				FROM tiles,areas,tiles_to_areas,messages,users
 				WHERE (tile_bl_lat<='".$lat."' AND tile_bl_long<='".$long."')
 				AND (tile_tr_lat>='".$lat."' AND tile_tr_long>='".$long."')
 				AND tile_to_area_tile_id=tile_id
 				AND tile_to_area_area_id=area_id
 				AND message_area_id=area_id
 				AND area_state_id=2
+				AND user_id=message_user_id
+				AND user_user_type_id=3
 				AND message_user_type_id=".$category_id."
 				ORDER BY message_creation_timestamp DESC
 			");
@@ -88,6 +91,34 @@ class Api_model extends CI_Model {
 					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
 					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
 					'distance' => (empty($row['distance']) ? -1: $row['distance'])
+				);
+				$this->add_view($person_id,$row['message_id']);
+			}*/
+			$query = $this->db->query("
+				SELECT * FROM (SELECT *, (((acos(sin((".$lat."*pi()/180)) *
+				sin((message_lat*pi()/180))+cos((".$lat."*pi()/180)) *
+				cos((message_lat*pi()/180)) * cos(((".$long."-
+				message_long)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance
+				FROM messages)myTable,persons
+				WHERE distance <= 9999999999999
+				AND person_id=message_person_id
+				ORDER BY distance ASC
+			");
+			
+			foreach ($query->result_array() as $row) {
+				$result['messages'][] = array(
+					'message_id' => $row['message_id'],
+					'message_creation_timestamp' => $row['message_creation_timestamp'],
+					'message_title' => $row['message_title'],
+					'message_teaser' => $row['message_teaser'],
+					'message_text' => $row['message_text'],
+					'message_lat' => $row['message_lat'],
+					'message_long' => $row['message_long'],
+					'message_views' => $this->get_views($row['message_id']),
+					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
+					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
+					'distance' => (empty($row['distance']) ? -1: $row['distance']),
+					'person_username' => $row['person_username']
 				);
 				$this->add_view($person_id,$row['message_id']);
 			}
