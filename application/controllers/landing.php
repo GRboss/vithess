@@ -22,6 +22,12 @@ class Landing extends CI_Controller {
 		$this->load->view('landing/landing');
 		$this->load->view('_bottom');
 	}
+	
+	public function contact() {
+		$this->load->view('_top');
+		$this->load->view('contact/contact');
+		$this->load->view('_bottom');
+	}
 }
 
 /* End of file welcome.php */

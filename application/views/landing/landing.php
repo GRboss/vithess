@@ -13,7 +13,7 @@
 							<li class="active"><a href="#">Αρχική</a></li>
 							<li><a href="index.php/enterprises">Επιχειρήσεις</a></li>
 							<li><a href="index.php/municipality">Δημοτική Αρχή</a></li>
-							<li><a href="#">Επικοινωνία</a></li>
+							<li><a href="index.php/contact">Επικοινωνία</a></li>
 						</ul>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 
 				<div class="inner cover">
 					<h1 class="cover-heading">ViThess</h1>
-					<p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+					<p class="lead">Βγείτε έξω, περπατείστε, ανακαλύψτε και γνωρίστε την πιο όμορφη πόλη της Ευρώπης!</p>
 					<p class="lead">
 						<a href="#" class="btn btn-lg btn-default">Learn more</a>
 					</p>

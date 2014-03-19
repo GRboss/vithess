@@ -52,7 +52,7 @@ class Api_model extends CI_Model {
 			");
 			
 			foreach ($query->result_array() as $row) {
-				if(true || !$this->hasSeenIt($person_id, $row['message_id'])) {
+				//if(true || !$this->hasSeenIt($person_id, $row['message_id'])) {
 					$result['messages'][] = array(
 						'message_id' => $row['message_id'],
 						'message_creation_timestamp' => $row['message_creation_timestamp'],
@@ -68,7 +68,7 @@ class Api_model extends CI_Model {
 						'distance' => $this->distance($lat, $long, $row['company_lat'], $row['company_long'], FALSE)
 					);
 					$this->add_view($person_id,$row['message_id']);
-				}
+				//}
 			}
 		} else if($category_id==3) {
 			/*$query = $this->db->query("
@@ -105,9 +105,10 @@ class Api_model extends CI_Model {
 				sin((message_lat*pi()/180))+cos((".$lat."*pi()/180)) *
 				cos((message_lat*pi()/180)) * cos(((".$long."-
 				message_long)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance
-				FROM messages)myTable,persons
+				FROM messages)myTable,users
 				WHERE distance <= 9999999999999
-				AND person_id=message_person_id
+				AND user_id=message_user_id
+				AND user_user_type_id=3
 				ORDER BY distance ASC
 			");
 			
@@ -123,8 +124,7 @@ class Api_model extends CI_Model {
 					'message_views' => $this->get_views($row['message_id']),
 					'message_up_votes' => $this->get_message_votes($row['message_id'],1),
 					'message_down_votes' => $this->get_message_votes($row['message_id'],-1),
-					'distance' => (empty($row['distance']) ? -1: $row['distance']),
-					'person_username' => $row['person_username']
+					'distance' => (empty($row['distance']) ? -1: $row['distance'])
 				);
 				$this->add_view($person_id,$row['message_id']);
 			}

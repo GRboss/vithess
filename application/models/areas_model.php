@@ -9,12 +9,12 @@ class Areas_model extends CI_Model {
 		parent::__construct();
 	}
 	
-	function get_total_areas($state_id) {
+	function get_total_areas($state_id,$company_id) {
 		if($state_id>0) {
 			$query = $this->db->query("
 				SELECT count(area_id) AS total_areas
 				FROM areas
-				WHERE area_company_id=1
+				WHERE area_company_id=".$company_id."
 				AND area_state_id=".$state_id."
 				AND area_active=1
 			");

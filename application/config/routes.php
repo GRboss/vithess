@@ -38,6 +38,7 @@
 |
 */
 
+$route['contact'] = "landing/contact";
 $route['reported/(:any)/(:any)'] = "reported/$1/$2";
 $route['reported'] = "reported";
 $route['api/get_messages/(:num)/(:num)/(:num)/(:num)'] = "api/get_messages/$1/$2/$3/$4";

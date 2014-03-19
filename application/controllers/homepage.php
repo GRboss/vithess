@@ -13,7 +13,7 @@ class Homepage extends CI_Controller {
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3)-1 : 0;
 		
 		$config['base_url'] = base_url('index.php/homepage/page');
-		$config['total_rows'] = $this->Areas_model->get_total_areas(0);
+		$config['total_rows'] = $this->Areas_model->get_total_areas(0,$this->session->userdata('user_company_id'));
 		$config['per_page'] = 5; 
 
 		$this->pagination->initialize($config); 
