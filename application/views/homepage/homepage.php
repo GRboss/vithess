@@ -1,4 +1,15 @@
 <link href="<?php echo base_url(); ?>css/homepage.css" rel="stylesheet">
+<style>
+	html,
+	body {
+		height: 100%;
+		background-color: #333;
+		background: url(<?php echo base_url(); ?>css/images/rotonta-blured.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+</style>
 </head>
 <body>
 	<?php
@@ -9,7 +20,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1><a href="<?php echo base_url(); ?>">ViThess</a>
+					<h1><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('css/images/logo.png'); ?>" width="100" /></a>
 						<span class="pull-right">
 							<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a> 
 							<a href="<?php echo base_url("index.php/areas/create"); ?>" class="btn btn-lg btn-primary">

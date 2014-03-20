@@ -8,7 +8,7 @@
 
 				<div class="masthead clearfix">
 					<div class="inner">
-						<h3 class="masthead-brand"><a href="<?php echo base_url(); ?>">ViThess</a></h3>
+						<h3 class="masthead-brand"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('css/images/logo.png'); ?>" width="100" /></a></h3>
 						<ul class="nav masthead-nav">
 							<li class="active"><a href="#">Αρχική</a></li>
 							<li><a href="index.php/enterprises">Επιχειρήσεις</a></li>

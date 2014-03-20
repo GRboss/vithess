@@ -17,6 +17,12 @@
 		<script type="text/javascript">
 			BASEURL = '<?php echo base_url(); ?>';
 		</script>
+		
+		<style>
+			.table {
+				background-color: rgba(245, 245, 245, 0.4);
+			}
+		</style>
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

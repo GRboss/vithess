@@ -2,6 +2,17 @@
 <link href="<?php echo base_url(); ?>css/areas/create.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>js/jquery-ui-1.10.4.custom/css/start/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/timepicker.css" rel="stylesheet">
+<style>
+	html,
+	body {
+		height: 100%;
+		background-color: #333;
+		background: url(<?php echo base_url(); ?>css/images/rotonta-blured.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+</style>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="<?php echo base_url(); ?>js/map.js"></script>
@@ -18,7 +29,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1><a href="<?php echo base_url(); ?>">ViThess</a>
+				<h1><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('css/images/logo.png'); ?>" width="100" /></a>
 					<span class="pull-right">
 						<a href="<?php echo base_url("index.php/homepage"); ?>" class="btn btn-default">Περιοχές</a>
 						<a href="<?php echo base_url("index.php/enterprises/logout"); ?>" class="btn btn-default">Αποσύνδεση</a>

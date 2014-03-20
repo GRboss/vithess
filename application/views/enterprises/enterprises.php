@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row">
 			<p style="text-align: center; font-size: 40px;">
-				<a href="<?php echo base_url(); ?>" class="site-name">ViThess</a>
+				<a href="<?php echo base_url(); ?>" class="site-name"><img src="<?php echo base_url('css/images/logo.png'); ?>" /></a>
 			</p>
 			<div class="col-md-12">
 				<div class="pr-wrap">
