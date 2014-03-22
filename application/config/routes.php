@@ -38,6 +38,8 @@
 |
 */
 
+$route['signup/(:any)'] = "signup/$1";
+$route['signup'] = "signup";
 $route['contact'] = "landing/contact";
 $route['reported/(:any)/(:any)'] = "reported/$1/$2";
 $route['reported'] = "reported";

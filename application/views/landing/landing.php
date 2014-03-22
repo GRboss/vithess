@@ -14,6 +14,7 @@
 							<li><a href="index.php/enterprises">Επιχειρήσεις</a></li>
 							<li><a href="index.php/municipality">Δημοτική Αρχή</a></li>
 							<li><a href="index.php/contact">Επικοινωνία</a></li>
+							<li><a href="index.php/signup">Εγγραφή</a></li>
 						</ul>
 					</div>
 				</div>
@@ -24,7 +25,7 @@
 					<h1 class="cover-heading">ViThess</h1>
 					<p class="lead">Βγείτε έξω, περπατείστε, ανακαλύψτε και γνωρίστε την πιο όμορφη πόλη της Ευρώπης!</p>
 					<p class="lead">
-						<a href="#" class="btn btn-lg btn-default">Learn more</a>
+						<a target="_blank" href="https://www.youtube.com/watch?v=v6wvzsoTcUQ" class="btn btn-lg btn-default">Δείτε το Video</a>
 					</p>
 				</div>
 
