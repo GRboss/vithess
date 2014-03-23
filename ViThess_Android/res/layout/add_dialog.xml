@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/new_title_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_title_message" 
+        android:maxLength="30"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/new_text_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_text_message" 
+        android:maxLength="180"
+       	android:lines="6"
+       	android:gravity="top"
+        android:singleLine="false"
+        android:inputType="textMultiLine"/>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+         <Button
+            android:id="@+id/doAddMessage"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_message"
+            android:textColor="#2fb3e4"
+            android:textSize="12sp" />
+          <Button
+            android:id="@+id/cancelAddMessage"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/cancel_add_message"
+            android:textColor="#2fb3e4"
+            android:textSize="12sp" />
+    </LinearLayout>
+    
+
+</LinearLayout>

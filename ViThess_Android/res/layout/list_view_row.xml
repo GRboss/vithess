@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip" 
+    android:background="#ffffff" 
+    android:orientation="vertical" >
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/message_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.47"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_vertical"
+            android:paddingTop="7dp"
+            android:text="@string/message_title"
+            android:textColor="#2fb3e4"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+			android:singleLine="false" />
+
+        <ImageButton
+            android:id="@+id/imageLike"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/views"
+            android:onClick="likeMessage"
+            android:src="@drawable/like" />
+
+        <TextView
+            android:id="@+id/likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textColor="#2fb3e4"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/imageHate"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/views"
+            android:onClick="dislikeMessage"
+            android:src="@drawable/hate" />
+
+        <TextView
+            android:id="@+id/dislikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textColor="#2fb3e4"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="15dp" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />                
+
+        <Button
+            android:id="@+id/reportMessage"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="reportMessage"
+            android:text="@string/report_button"
+            android:textColor="#2fb3e4"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/message_teaser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="marquee"
+		android:singleLine="false"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/message_teaser"
+        android:textColor="#000000"
+        android:textSize="14sp" 
+        />
+    <TextView 
+    	android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+    <LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+        
+		<ImageView
+	        android:contentDescription="@string/views"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/views" 
+	        android:paddingTop="5dp"/>
+	    <TextView 
+	        android:id="@+id/message_views"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/meters_away"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/meters_away"
+        android:textSize="12sp" 
+        android:textColor="#9c9c9c"
+        android:fontFamily="sans-serif-light" />
+	
+    
+    <ImageButton
+            android:id="@+id/shareFacebook"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/share"
+            android:onClick="shareMessage"
+            android:src="@drawable/share" />
+    
+    
+
+    
+	
+    
+
+    
+
+</LinearLayout> 

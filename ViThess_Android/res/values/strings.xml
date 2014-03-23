@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_id">220162084844615</string>
+    <string name="app_name">ViThess</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="welcomeTextTitle">Καλωσήρθατε στην εφαρμογή ViThess!</string>
+    <string name="welcomeText">Βγείτε έξω, περπατείστε, ανακαλύψτε και γνωρίστε την πιο όμορφη πόλη της Ευρώπης!</string>
+    <string name="ViThess">ViThess</string>
+    
+    <string name="addMessage">Νέο Μήνυμα</string>
+    <string name="refreshMessages">Ανανέωση</string>
+    <string name="descr_overflow_button">Περισσότερα</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="about">Σχετικά</string>
+    <string name="logout">Έξοδος</string>
+    
+    <string name="message_image">Εικόνα</string>
+    <string name="message_title">Τίτλος</string>
+    <string name="message_teaser">Κείμενο Teaser</string>
+    <string name="meters_away">Μέτρα Μακρυά</string>
+    <string name="views">Προβολές</string>
+    <string name="report_button">Αναφορά</string>
+    <string name="share">SHare on Facebook</string>
+    
+    <string name="add_title_message">Τίτλος</string>
+	<string name="add_text_message">Μήνυμα</string>
+	<string name="add_message">OK</string>
+	<string name="cancel_add_message">Άκυρο</string>
+	
+	<string name="imageTab">Tab</string>
+	
+</resources>

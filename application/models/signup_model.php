@@ -15,7 +15,7 @@ class Signup_model extends CI_Model {
 		} else if($type===3) {
 			$query = $this->db->query("
 				INSERT INTO users (user_user_type_id,user_company_id,user_full_name,user_username,user_password,user_active)
-				VALUES (2,NULL,'".$username."','".$email."','".$password."',1)
+				VALUES (3,NULL,'".$username."','".$email."','".$password."',1)
 			");
 		}
     }
