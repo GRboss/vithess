@@ -1,4 +1,4 @@
 vithess
 =======
 
-Apps for Greece contest
+Apps for Greece contest.
